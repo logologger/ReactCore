@@ -1,0 +1,87 @@
+<html>
+    <head>
+
+        <title>React </title>
+        <style>
+           
+        
+        </style>
+        
+        
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+
+    <body>
+        <div id="container"></div>
+          <script type="text/babel">
+           class Display extends React.Component {
+              render() {
+                  return (
+                      <div>
+                        <p>{ this.props.color }</p>
+                        <p>{ this.props.num }</p>
+                        <p>{ this.props.size }</p>
+                      </div>
+                  );
+              }
+          }
+           class Label extends React.Component {
+              render() {
+                  return (
+                      <div>
+                        <Display  {...this.props}/>
+
+                      </div>
+                  );
+              }
+          }
+
+          class Shirt extends React.Component {
+              render() {
+                  return (
+                      <div>
+                        <Label {...this.props} />
+
+                      </div>
+                  );
+              }
+          }
+            ReactDOM.render(
+                <div>
+                    <Shirt color="blue"
+                        num="2"
+                        size="2" />
+                </div>,
+                document.querySelector("#container")
+            )
+          </script>
+
+    </body>
+
+
+</html>
+
+<!-- 
+
+Is this the best way to transfer properties?
+
+Using the spread operator to transfer properties is convenient, 
+and it’s a marked improvement over explicitly defining each
+ property at each component as we were originally doing. 
+ The thing is, even the spread operator approach isn’t a
+  perfect solution. If all you want to do is transfer a 
+  property to a particular component, having each intermediate
+   component play a role in passing it on is unnecessary. 
+   Worse, it has the potential to be a performance bottleneck.
+    Any change to a property that you are passing along will
+     trigger a component update on each component along the 
+     property’s path. That’s not a good thing! Later, 
+     we look at ways to solve this transferring properties
+      problem in a much better, without any side effects.
+
+
+
+
+-->
