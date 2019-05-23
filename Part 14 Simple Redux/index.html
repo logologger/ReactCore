@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+  <title>Favorite Colors!</title>
+  <script src="https://unpkg.com/redux@latest/dist/redux.js"></script>
+</head>
+ 
+<body>
+  <script>
+
+/*  These wo are more of an action creators */
+    function addColor(value) {
+        return {
+            type: 'ADD',
+            color:value
+        }
+    }
+
+    function removeColor(value) {
+        return {
+            type: 'REMOVE',
+            color: value
+        }
+    }
+
+
+
+
+    /*   Lets create Reducer */
+
+    function favoriteColors( state , action) {
+        if(state === undefined) {
+            state = [];
+        }
+
+        if(action.type === 'ADD') {
+            return state.concat(action.color);
+        }
+        else if(action.type === 'REMOVE') {
+            return state.filter((item) => item!==action.color);
+        }
+        else {
+            return state;
+        }
+    }
+
+    /*  Create  Store */
+
+    var store = Redux.createStore(favoriteColors);
+
+    store.subscribe(render);
+
+    function render() {
+        console.log(store.getState())
+    }
+
+        store.dispatch(addColor("blue"));
+        console.log(store.getState());
+    store.dispatch(addColor("yellow"));
+    console.log(store.getState());
+    store.dispatch(addColor("green"));
+    console.log(store.getState());
+    store.dispatch(addColor("red"));
+    console.log(store.getState());
+    store.dispatch(addColor("gray"));
+    console.log(store.getState());
+    store.dispatch(addColor("orange"));
+    console.log(store.getState());
+    store.dispatch(removeColor("gray"));
+    console.log(store.getState());
+ 
+  </script>
+</body>
+ 
+</html>

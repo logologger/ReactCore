@@ -38,3 +38,18 @@ The reason is scalability. Even for simple apps, keeping our application state i
 3. You specify what the final state should be. To keep things simple, your state is never modified or mutated. You use a reducer to specify what the final result of your state should be.
 
 </pre>
+
+<h3>Things you should never do inside a Reducer</h3>
+
+<pre>
+
+
+
+  Mutate its arguments
+
+ Perform side effects like API calls and routing transitions
+
+ Call non-pure functions, e.g. Date.now() or Math.random()
+
+Given the same arguments, it should calculate the next state and return it. No surprises. No side effects. No API calls. No mutations. Just a calculation.
+</pre>
